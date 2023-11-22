@@ -1,0 +1,13 @@
+extends base.pug
+
+
+block content
+    div
+        p=video.description
+        small=video.creatAt  
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+    br
+    a(href=`${video.id}/delete`) delete Video &rarr;
+
+
+
