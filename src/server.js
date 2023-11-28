@@ -16,10 +16,10 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true })); // 익스프레스가 Form의 내용을 자바스크립트 형식으로 변환하는 코드
 app.use(
   session({
-    secret: "Hello!",
-    resave: "true",
-    saveUninitialized: "true",
-    store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/wetube" }),
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
 
