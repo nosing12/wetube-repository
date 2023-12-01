@@ -17,18 +17,11 @@ app.use(express.urlencoded({ extended: true })); // 익스프레스가 Form의 �
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: false, // 모든 사용자가 접속했을 때 쿠키를 DB에 저장하는 것을 방지
+    saveUninitialized: false, // request 때 생성된 이후로 아무런 작업이 가해지지않는 초기상태의 세션을 저장한다.
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
-
-app.use((req, res, next) => {
-  req.sessionStore.all((error, sessions) => {
-    console.log(session);
-    next();
-  });
-});
 
 app.use(localsMiddleware);
 app.use("/", rootRouter);
